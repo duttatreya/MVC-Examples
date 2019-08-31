@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MVCDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="OrderTransaction">
+    <Key>
+      <PropertyRef Name="TransID" />
+    </Key>
+    <Property Name="TransID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" />
+    <Property Name="pid" Type="Int32" />
+    <Property Name="qty" Type="Int32" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__OrderTransa__pid__2C3393D0" FromRole="OrderTransaction" ToRole="ProductInfo" />
+    <NavigationProperty Name="OrderInfo" Relationship="MVCDBModel.FK__OrderTran__Order__2B3F6F97" FromRole="OrderTransaction" ToRole="OrderInfo" />
+  </EntityType>
+  <EntityType Name="PersonInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mobno" Type="Int64" />
+    <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="OrderInfoes" Relationship="MVCDBModel.FK__OrderInfo__Perso__286302EC" FromRole="PersonInfo" ToRole="OrderInfo" />
+  </EntityType>
+  <EntityType Name="ProductInfo">
+    <Key>
+      <PropertyRef Name="pid" />
+    </Key>
+    <Property Name="pid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <NavigationProperty Name="OrderTransactions" Relationship="Self.FK__OrderTransa__pid__2C3393D0" FromRole="ProductInfo" ToRole="OrderTransaction" />
+  </EntityType>
+  <Association Name="FK__OrderTransa__pid__2C3393D0">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="OrderTransaction" Type="Self.OrderTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="pid" />
+      </Principal>
+      <Dependent Role="OrderTransaction">
+        <PropertyRef Name="pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MVCDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="OrderTransactions" EntityType="Self.OrderTransaction" />
+    <EntitySet Name="PersonInfoes" EntityType="Self.PersonInfo" />
+    <EntitySet Name="ProductInfoes" EntityType="Self.ProductInfo" />
+    <AssociationSet Name="FK__OrderTransa__pid__2C3393D0" Association="Self.FK__OrderTransa__pid__2C3393D0">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="OrderTransaction" EntitySet="OrderTransactions" />
+    </AssociationSet>
+    <EntitySet Name="OrderInfoes" EntityType="MVCDBModel.OrderInfo" />
+    <AssociationSet Name="FK__OrderInfo__Perso__286302EC" Association="MVCDBModel.FK__OrderInfo__Perso__286302EC">
+      <End Role="PersonInfo" EntitySet="PersonInfoes" />
+      <End Role="OrderInfo" EntitySet="OrderInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderTran__Order__2B3F6F97" Association="MVCDBModel.FK__OrderTran__Order__2B3F6F97">
+      <End Role="OrderInfo" EntitySet="OrderInfoes" />
+      <End Role="OrderTransaction" EntitySet="OrderTransactions" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="OrderInfo">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PersonID" Type="Int32" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="TotAmount" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Status" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PersonInfo" Relationship="MVCDBModel.FK__OrderInfo__Perso__286302EC" FromRole="OrderInfo" ToRole="PersonInfo" />
+    <NavigationProperty Name="OrderTransactions" Relationship="MVCDBModel.FK__OrderTran__Order__2B3F6F97" FromRole="OrderInfo" ToRole="OrderTransaction" />
+  </EntityType>
+  <Association Name="FK__OrderInfo__Perso__286302EC">
+    <End Type="MVCDBModel.PersonInfo" Role="PersonInfo" Multiplicity="0..1" />
+    <End Type="MVCDBModel.OrderInfo" Role="OrderInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonInfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="OrderInfo">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderTran__Order__2B3F6F97">
+    <End Type="MVCDBModel.OrderInfo" Role="OrderInfo" Multiplicity="0..1" />
+    <End Type="MVCDBModel.OrderTransaction" Role="OrderTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderInfo">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderTransaction">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

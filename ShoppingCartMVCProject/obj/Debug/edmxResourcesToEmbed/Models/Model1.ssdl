@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MVCDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="OrderInfo">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PersonID" Type="int" />
+    <Property Name="OrderDate" Type="datetime" />
+    <Property Name="TotAmount" Type="money" />
+    <Property Name="Status" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="OrderTransaction">
+    <Key>
+      <PropertyRef Name="TransID" />
+    </Key>
+    <Property Name="TransID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderID" Type="int" />
+    <Property Name="pid" Type="int" />
+    <Property Name="qty" Type="int" />
+  </EntityType>
+  <EntityType Name="PersonInfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="mobno" Type="bigint" />
+    <Property Name="password" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="type" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductInfo">
+    <Key>
+      <PropertyRef Name="pid" />
+    </Key>
+    <Property Name="pid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="price" Type="money" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__OrderInfo__Perso__286302EC">
+    <End Role="PersonInfo" Type="Self.PersonInfo" Multiplicity="0..1" />
+    <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PersonInfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="OrderInfo">
+        <PropertyRef Name="PersonID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderTran__Order__2B3F6F97">
+    <End Role="OrderInfo" Type="Self.OrderInfo" Multiplicity="0..1" />
+    <End Role="OrderTransaction" Type="Self.OrderTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderInfo">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderTransaction">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderTransa__pid__2C3393D0">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="OrderTransaction" Type="Self.OrderTransaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="pid" />
+      </Principal>
+      <Dependent Role="OrderTransaction">
+        <PropertyRef Name="pid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MVCDBModelStoreContainer">
+    <EntitySet Name="OrderInfo" EntityType="Self.OrderInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderTransaction" EntityType="Self.OrderTransaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PersonInfo" EntityType="Self.PersonInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__OrderInfo__Perso__286302EC" Association="Self.FK__OrderInfo__Perso__286302EC">
+      <End Role="PersonInfo" EntitySet="PersonInfo" />
+      <End Role="OrderInfo" EntitySet="OrderInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderTran__Order__2B3F6F97" Association="Self.FK__OrderTran__Order__2B3F6F97">
+      <End Role="OrderInfo" EntitySet="OrderInfo" />
+      <End Role="OrderTransaction" EntitySet="OrderTransaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderTransa__pid__2C3393D0" Association="Self.FK__OrderTransa__pid__2C3393D0">
+      <End Role="ProductInfo" EntitySet="ProductInfo" />
+      <End Role="OrderTransaction" EntitySet="OrderTransaction" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
