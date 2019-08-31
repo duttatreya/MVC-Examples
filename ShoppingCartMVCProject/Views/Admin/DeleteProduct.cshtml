@@ -1,0 +1,22 @@
+﻿@model ShoppingCartMVCProject.Models.ProductInfo
+@{
+    ViewBag.Title = "DeleteProduct";
+}
+
+<h2>DeleteProduct</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <div>
+        Select Product: @Html.DropDownList("ddlprod",Session["delete"] as SelectList)
+    </div>
+    <div>
+        <input type="submit" value="Delete" />
+    </div>
+    <div>
+        @Html.ActionLink("Back","Index")
+    </div>
+}
+
+
+

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ShoppingCartMVCProject.Models.ProductInfo>
+@{
+    ViewBag.Title = "CreateOrder";
+}
+
+<h2>CreateOrder</h2>
+<table border="1">
+    <tr>
+        <th>PID</th>
+        <th>Product Despcription</th>
+        <th>Product Price</th>
+        <th>Order Product</th>
+    </tr>
+    @foreach(var p in Model)
+    {
+    <tr>
+        <td>@p.pid</td>
+        <td>@p.pname</td>
+        <td>@p.price</td>
+        <td>@Html.ActionLink("Order Product","OrderProduct","User",new { pid =p.pid},null)</td>
+    </tr>
+    }
+</table>
+
+@Html.ActionLink("PayNow","CardInfo","Gateway")
+
+

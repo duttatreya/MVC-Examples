@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ShoppingCartMVCProject.Models.ShoppingCartList>
+@{
+    ViewBag.Title = "CardInfo";
+}
+
+<h2>Items Ordered</h2>
+
+<table border="1">
+    <tr>
+        <th>Product ID</th>
+        <th>Quantity</th>
+        <th>Total Amount</th>
+    </tr>
+    @foreach(var m in Model)
+    {
+    <tr>
+        <td>@m.PID</td>
+
+        <td>@m.Qty</td>
+
+        <td>@m.TotAmt</td>
+    </tr>
+    }
+</table>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true){
+<table border="3">
+    <tr>
+        <td>Amount Payable</td>
+        <td>@Convert.ToDecimal(Session["finalamt"])</td>
+    </tr>
+    <tr>
+        <td>Card No</td>
+        <td><input type="text" id="txtcardno" name="txtcardno" pattern="\d{16}" /></td>
+    </tr>
+    <tr>
+        <td>CVV</td>
+        <td><input type="password" id="txtcvv" name="txtcvv" pattern="\d{3}" /></td>
+    </tr>
+    <tr>
+        <td>Expiry Date</td>
+        <td><select name="ddlmonth" id="ddlmonth">
+            @for(int i = 1; i <= 12; i++)
+            {
+                <option value="@i">@i</option>
+            }
+            </select></td>
+        <td>
+            <select name="ddlyear" id="ddlyear">
+                @for (int i = 19; i <= 25; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td><input type="submit" value="Pay" /></td>
+    </tr>
+</table>
+
+    }
+}

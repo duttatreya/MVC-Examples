@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ShoppingCartMVCProject.Models.PersonInfo>
+@{
+    ViewBag.Title = "ViewCustomer";
+}
+
+<h2>ViewCustomer</h2>
+
+<table border="3">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Mobile Number</th>
+    </tr>
+    @foreach(var m in Model)
+    {
+    <tr>
+        <td>@m.id</td>
+        <td>@m.name</td>
+        <td>@m.mobno</td>
+    </tr>
+
+    }
+</table>

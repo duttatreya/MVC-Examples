@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm())
+{
+<table>
+    <tr>
+        <th>@Html.ActionLink("AddProduct", "AddProduct")</th>
+        <th>@Html.ActionLink("Select And Update Product", "SelectUpdateProduct")</th>
+        <th>@Html.ActionLink("Edit Product", "EditProduct")</th>
+        <th>@Html.ActionLink("Delete Product", "DeleteProduct")</th>
+        <th>@Html.ActionLink("View Customer", "ViewCustomer")</th>
+        <th>@Html.ActionLink("Process Order", "ProcessOrder")</th>
+    </tr>
+</table>
+}
+

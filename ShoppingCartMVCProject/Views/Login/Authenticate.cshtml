@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Authenticate";
+}
+
+<h2>Authenticate</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <table border="3">
+        <tr>
+            <td>Enter Username:</td>
+            <td>@Html.TextBox("txtuser")</td>
+        </tr>
+        <tr>
+            <td>Enter Password:</td>
+            <td>@Html.TextBox("txtpass")</td>
+        </tr>
+        <tr>
+                <td>Select UserType</td>
+                <td>
+                    @Html.DropDownList("ddltype",new List<SelectListItem> {
+               new SelectListItem{Text="Admin",Value="Admin"},
+               new SelectListItem{Text="Customer",Value="Customer"}
+           },"Select")
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="login" /></td>
+            <td>@Html.ActionLink("RegisterNew","InsertNew")</td>
+        </tr>
+
+    </table>
+    }
+

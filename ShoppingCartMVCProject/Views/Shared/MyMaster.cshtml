@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div style="background-color: orange;font-size:20px;font-family: Arial;text-align:center ; text-transform:capitalize;width: auto; height:150px">
+        <table>
+            <td>@Html.ActionLink("Login", "Authenticate", "Login")</td>
+            <td>@Html.ActionLink("Admin Home", "Index", "Admin")</td>
+            <td>@Html.ActionLink("User Home", "Index", "User")</td>
+
+        </table>
+    </div>
+    <div style="background-color:lightgreen;font-family:'Times New Roman'; width:auto;height:auto">
+        @RenderBody()
+
+    </div>
+    <div><h2 style="text-align:center; font-stretch:expanded " >Shopping Cart MVC</h2></div>
+
+</body>
+</html>
+

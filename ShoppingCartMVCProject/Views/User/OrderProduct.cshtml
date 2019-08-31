@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "OrderProduct";
+}
+
+<h2>OrderProduct</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true){
+        if(Session["order"] == null) { }
+        else
+        {
+            var data = (ShoppingCartMVCProject.Models.ProductInfo)Session["order"];
+<table border="1">
+    <tr>
+        <th>ProductID</th>
+        <th><input type="text" id="txtid" name="txtid" value="@data.pid" readonly="readonly" /></th>
+    </tr>
+    <tr>
+        <th>Product Name</th>
+        <th><input type="text" id="txtpname" name="txtpname" value="@data.pname" readonly="readonly" /></th>
+    </tr>
+    <tr>
+        <th>Price</th>
+        <th><input type="text" id="txtprice" name="txtprice" value="@data.price" readonly="readonly" /></th>
+    </tr>
+    <tr>
+        <th>Enter Quantity</th>
+        <th><input type="number" id="txtqty" name="txtqty" min="1" max="10" /></th>
+    </tr>
+    <tr>
+        <th><input type="submit" value="AddMore" name="Command" /></th>
+
+    </tr>
+    <tr>
+        <th><input type="submit" value="Pay Now" name="Command" /></th>
+    </tr>
+
+
+</table>
+        }
+    }
+}

@@ -1,0 +1,47 @@
+﻿@using RazorExamples;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @{ 
+        List<EmpInfo> empList = new List<EmpInfo>
+        {
+            new EmpInfo{EmpId = 1,EmpName="Blake",Dept="Account",Desg="Manager",Salary=24542},
+
+            new EmpInfo{EmpId = 2,EmpName="Peter",Dept="IT",Desg="PM",Salary=44500},
+
+            new EmpInfo{EmpId = 3,EmpName="Griffin",Dept="HR",Desg="Assistant",Salary=20000},
+    };
+
+    }
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>EmpID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th>Salary</th>
+            </tr>
+            @foreach (var e in empList)
+            {
+            <tr>
+                <td>@e.EmpId</td>
+                <td>@e.EmpName</td>
+                <td>@e.Dept</td>
+                <td>@e.Desg</td>
+                <td>@e.Salary</td>
+            </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

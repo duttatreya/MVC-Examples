@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "SelectUpdateProduct";
+}
+
+<h2>SelectUpdateProduct</h2>
+@using (Html.BeginForm())
+{
+
+    <div>
+        Select Product : @Html.DropDownList("ddlprod", Session["prod"] as SelectList)
+    </div>
+    <div>
+        <input type="submit" value="Select By Id" name="Command" />
+    </div>
+    @Html.ValidationSummary(true)
+    if (Session["data"] == null) { }
+    else
+    {
+        var prod = (ShoppingCartMVCProject.Models.ProductInfo)Session["data"];
+        <table>
+            <tr>
+                <td>ProdID</td>
+                <td><input type="text" id="txtpid" name="txtpid" value="@prod.pid" readonly="readonly" /></td>
+            </tr>
+            <tr>
+                <td>ProdName</td>
+                <td><input type="text" id="txtpname" name="txtpname" value="@prod.pname"/></td>
+            </tr>
+            <tr>
+                <td>Prod price</td>
+                <td><input type="text" id="txtprice" name="txtprice" value="@prod.price"  /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Update" name="Command" /></td>
+                <td>@Html.ActionLink("Back", "Index")</td>
+            </tr>
+
+        </table>
+    }
+}

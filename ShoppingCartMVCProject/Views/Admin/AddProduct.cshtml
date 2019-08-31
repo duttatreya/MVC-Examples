@@ -1,0 +1,26 @@
+﻿@model ShoppingCartMVCProject.Models.ProductInfo
+@{
+    ViewBag.Title = "AddProduct";
+}
+
+<h2>AddProduct</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+<table>
+    <tr>
+        <td>Enter Product Name</td>
+        <td>@Html.TextAreaFor(x => x.pname)</td>
+        <td>@Html.ValidationMessageFor(x => x.pname)</td>
+    </tr>
+    <tr>
+        <td>Enter Product Price</td>
+        <td>@Html.TextAreaFor(x => x.price)</td>
+        <td>@Html.ValidationMessageFor(x => x.price)</td>
+    </tr>
+    <tr>
+        <td><input type="submit" value="Add Product" /></td>
+        <td>@Html.ActionLink("Back","Index")</td>
+    </tr>
+</table>
+}

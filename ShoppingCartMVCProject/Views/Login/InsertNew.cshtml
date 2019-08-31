@@ -1,0 +1,35 @@
+﻿@model ShoppingCartMVCProject.Models.PersonInfo
+@{
+    ViewBag.Title = "InsertNew";
+}
+
+<h2>InsertNew</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+<table border="4">
+    <tr>
+        <td>Enter Name</td>
+        <td>@Html.TextBoxFor(x => x.name)</td>
+        <td>@Html.ValidationMessageFor(x => x.name)</td>
+    </tr>
+    <tr>
+        <td>Enter Mobile Number</td>
+        <td>@Html.TextBoxFor(x => x.mobno)</td>
+        <td>@Html.ValidationMessageFor(x=>x.mobno)</td>
+    </tr>
+    <tr>
+        <td>Select UserType</td>
+        <td>
+            @Html.DropDownList("ddltype",new List<SelectListItem> {
+       new SelectListItem{Text="Admin",Value="Admin"},
+       new SelectListItem{Text="Customer",Value="Customer"}
+   },"Select")
+        </td>
+    </tr>
+    <tr>
+        <td><input type="submit" value="login" /></td>
+        <td>@Html.ActionLink("Login Here", "Authenticate")</td>
+    </tr>
+</table>
+}

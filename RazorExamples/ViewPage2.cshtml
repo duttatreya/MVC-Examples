@@ -1,0 +1,31 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @{ 
+        string[] cities = { "Bangalore", "Mumbai", "Pune", "Kolkata" };
+
+    }
+</head>
+<body>
+    <div>
+        <table  border="1">
+            <tr>
+                <th>City Names</th>
+                @foreach(var c in cities)
+                {
+                    <tr>
+                        <td>@c</td>
+                    </tr>
+                }
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
